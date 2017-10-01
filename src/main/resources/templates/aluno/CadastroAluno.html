@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"	>
+
+<head>
+	<meta charset="UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/college.css}">
+	
+<title>Cadastro de Aluno</title>
+</head>
+
+
+<body>
+
+<div class="container">
+		
+	<th:block th:include="fragements/MensagemSucesso"></th:block>
+	
+	<form method="POST" th:object="${aluno}" 
+	th:action="${aluno.novo} ? @{/aluno/novo} : @{/aluno/{id}(id=${aluno.id})}">
+		
+	<input type="hidden" th:field="*{id}">	
+		
+		<th:block th:include="fragements/MensagemErroValidacao"></th:block>
+			
+		<div class="row header">
+			<div class="col-sm-10">
+				<h1 th:if="${aluno.novo}">Cadastro de Aluno</h1>
+				<h1 th:unless="${aluno.novo}">Edição de Aluno</h1>
+				
+			</div>
+			
+			<div class="col-sm-2">
+				<div class="aw-page-header-controls">
+					<a class="btn btn-primary" th:href="@{/aluno}">
+						Pesquisa de Alunos
+					</a>
+				</div>
+			</div>
+		</div>
+		
+		
+			<div class="form-group">
+				<label for="nome">Nome: </label>
+				<input id="nome" th:field="*{nome}" type="text" class="form-control">
+			</div>
+			
+			<div class="row">
+				
+				<div class="col-sm-6 form-group">
+					<label for="curso">Curso: </label>
+					<input id="curso" th:field="*{curso}" type="text" class="form-control">
+				</div>
+				
+				<div class="col-sm-6 form-group">
+					<label for="matricula">Matricula: </label>
+					<input id="matricula" class="form-control" th:field="*{matricula}" type="text">
+				</div>
+
+				</div>
+			
+			<div class="row">
+			
+			<div class="col-sm-6 form-group">
+				<label for="semestre">Semestre: </label>
+				<input class="form-control" id="semestre" th:field="*{semestre}" type="text">
+			</div>
+			
+			<div class="col-sm-6 form-group">
+				
+				<label for="status">Status: </label>
+				<select class="form-control" id="status" name="status" th:field="*{status}">
+					<option value="">Selecione</option>
+					<option th:each="status : ${status}" th:value="${status}" th:text="${status.descricao}"></option>
+				</select>
+				
+			</div>
+			</div>
+
+	
+		<input type="submit" value="Salvar" class="btn btn-primary">
+		
+	</form>
+</div>
+
+<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

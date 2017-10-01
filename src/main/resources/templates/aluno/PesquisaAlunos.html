@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"	
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  >
+
+<head>
+	<meta charset="UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/college.css}">
+	
+<title>Pesquisa de Alunos</title>
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="row header">
+		
+			<div class="col-sm-10">
+				<h1>Pesquisa de Alunos</h1>
+			</div>
+			
+			<div class="col-sm-2">
+				<div class="aw-page-header-controls">
+					<a class="btn btn-primary" th:href="@{/aluno/novo}">
+						Novo aluno
+					</a>
+				</div>
+			</div>
+		
+		</div>
+
+	<div class="table-responsive">
+	<table class="table table-hover table-bordered">
+		<thead>
+			<tr>	
+				<th>Nome</th>
+				<th>Curso</th>
+				<th>Matricula</th>
+				<th>Semestre</th>
+				<th>Status</th>
+				<th class="text-center">Ação</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="aluno : ${alunos}">
+				<td th:text="${aluno.nome}"></td>
+				<td th:text="${aluno.curso}"></td>
+				<td th:text="${aluno.matricula}"></td>
+				<td th:text=${aluno.semestre}></td>
+				<td th:text="${aluno.status.descricao}"></td>
+				<td class="text-center">
+					<a href="#" title="Editar" th:href="@{/aluno/{id}(id=${aluno.id})}" class="btn btn-primary">Editar</a>
+					<a href="#"  title="Excluir" th:href="@{/aluno/exclui/{id}(id=${aluno.id})}" class="btn btn-primary">Excluir</a>
+				</td>
+				
+			</tr>
+		</tbody>
+	</table>
+	</div>
+	</div>
+
+	<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+
+
+</html>
